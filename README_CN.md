@@ -1,6 +1,12 @@
 ## LabelSlider（Qt 带标签的可定制刻度值滑块）
 
-[English](README.md) | [中文](README_CN.md)
+<p align="center">
+  <a href="README.md">English</a> | <a href="README_CN.md">中文</a>
+</p>
+
+<p align="center">
+  <img src="labelslider.png" alt="LabelSlider">
+</p>
 
 一个基于Qt的带标签滑块组件，在刻度位置显示可定制格式化的数值，为数值选择提供增强的用户体验和视觉反馈。
 
@@ -137,10 +143,9 @@ slider->setFormatPrefixSuffix("$", ".00");  // 显示：$-100.00, $-75.00, $-50.
 // 3. Printf 风格格式化
 slider->setFormatType(LabelSlider::PrintfFormat);
 slider->setPrintfFormat("%+d dB");  // 显示：-100 dB, -75 dB, -50 dB, ..., +100 dB
-// 或者使用浮点数：
-slider->setPrintfFormat("%.1f°");   // 显示：-100.0°, -75.0°, -50.0°, ..., 100.0°
 
 // 4. 数值缩放和小数位数
+slider->setFormatType(LabelSlider::SimpleFormat);  // 使用简单格式以配合后缀和小数位
 slider->setValueScale(0.01);  // 将整数值缩放为小数（除以100）
 slider->setDecimalPlaces(2);  // 显示两位小数
 slider->setFormatSuffix("%");
@@ -243,6 +248,7 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 - 当 `tickValuesVisible()` 为 false 时，无论其他设置如何都不会显示标签。
 - 当相关属性发生变化时，组件会自动重建标签。
 - 对于垂直滑块，左侧标签右对齐，右侧标签左对齐。
+- `setDecimalPlaces()` 仅对 `SimpleFormat` 和 `PrefixSuffixFormat` 生效；`PrintfFormat` 请在格式串中控制精度（例如 `"%.2f"`）。
 
 ### 使用技巧
 

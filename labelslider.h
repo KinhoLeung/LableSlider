@@ -94,7 +94,6 @@ class LabelSlider : public QWidget
     double valueScale() const;
 
     void setCustomFormatter(std::function<QString(int)> formatter);
-
     void setCustomLabels(const QMap<int, QString> &labels);
     QMap<int, QString> customLabels() const;
     void setCustomLabel(int value, const QString &label);
@@ -108,6 +107,9 @@ class LabelSlider : public QWidget
     void rangeChanged(int min, int max);
     void actionTriggered(QAbstractSlider::SliderAction action);
 
+  private slots:
+    void updateLabelPositions();
+    
   private:
     void rebuildLabels();
     QString formatValue(int value) const;
@@ -124,6 +126,9 @@ class LabelSlider : public QWidget
     double m_valueScale = 1.0;
     std::function<QString(int)> m_customFormatter;
     QMap<int, QString> m_customLabels;
+
+  protected:
+    void resizeEvent(QResizeEvent *event) override;
 };
 
 #endif // LABELSLIDER_H

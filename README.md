@@ -1,6 +1,12 @@
 ## LabelSlider (Qt labeled slider with customizable tick values)
 
-[English](README.md) | [中文](README_CN.md)
+<p align="center">
+  <a href="README.md">English</a> | <a href="README_CN.md">中文</a>
+</p>
+
+<p align="center">
+  <img src="labelslider.png" alt="LabelSlider">
+</p>
 
 A Qt-based labeled slider widget that displays customizable formatted values at tick positions, providing enhanced user experience for value selection with visual feedback.
 
@@ -137,10 +143,9 @@ slider->setFormatPrefixSuffix("$", ".00");  // Displays: $-100.00, $-75.00, $-50
 // 3. Printf-style formatting
 slider->setFormatType(LabelSlider::PrintfFormat);
 slider->setPrintfFormat("%+d dB");  // Displays: -100 dB, -75 dB, -50 dB, ..., +100 dB
-// or with floating point:
-slider->setPrintfFormat("%.1f°");   // Displays: -100.0°, -75.0°, -50.0°, ..., 100.0°
 
 // 4. Value scaling with decimal places
+slider->setFormatType(LabelSlider::SimpleFormat);  // Ensure simple formatting with suffix
 slider->setValueScale(0.01);  // Scale integer values to decimal (divide by 100)
 slider->setDecimalPlaces(2);  // Show two decimal places
 slider->setFormatSuffix("%");
@@ -190,10 +195,12 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 ### API Overview
 
 #### Constructors
+
 - `LabelSlider(QWidget *parent = nullptr)`
 - `LabelSlider(Qt::Orientation orientation, QWidget *parent = nullptr)`
 
 #### Slider Properties
+
 - `void setRange(int min, int max)`
 - `void setMinimum(int min)` / `int minimum() const`
 - `void setMaximum(int max)` / `int maximum() const`
@@ -201,11 +208,13 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 - `void setOrientation(Qt::Orientation)` / `Qt::Orientation orientation() const`
 
 #### Tick Configuration
+
 - `void setTickPosition(QSlider::TickPosition position)` / `QSlider::TickPosition tickPosition() const`
 - `void setTickInterval(int interval)` / `int tickInterval() const`
 - `void setTickValuesVisible(bool visible)` / `bool tickValuesVisible() const`
 
 #### Formatting Options
+
 - `void setFormatType(FormatType type)` / `FormatType formatType() const`
 - `void setFormatSuffix(const QString &suffix)` / `QString formatSuffix() const`
 - `void setFormatPrefixSuffix(const QString &prefix, const QString &suffix)`
@@ -215,12 +224,14 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 - `void setValueScale(double scale)` / `double valueScale() const`
 
 #### Custom Formatting
+
 - `void setCustomFormatter(std::function<QString(int)> formatter)`
 - `void setCustomLabels(const QMap<int, QString> &labels)` / `QMap<int, QString> customLabels() const`
 - `void setCustomLabel(int value, const QString &label)`
 - `void clearCustomLabels()`
 
 #### Signals
+
 - `void valueChanged(int value)`
 - `void sliderMoved(int position)`
 - `void sliderPressed()`
@@ -243,6 +254,7 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 - When `tickValuesVisible()` is false, no labels are shown regardless of other settings.
 - The widget automatically rebuilds labels when relevant properties change.
 - For vertical sliders, labels on the left are right-aligned, and labels on the right are left-aligned.
+- `setDecimalPlaces()` applies only to `SimpleFormat` and `PrefixSuffixFormat`. For `PrintfFormat`, control precision in the format string (e.g., `"%.2f"`).
 
 ### Tips
 
@@ -262,7 +274,8 @@ tempSlider->setCustomFormatter([](int celsius) -> QString {
 ### Contributing
 
 Issues and pull requests are welcome. Please include:
+
 - Clear description of the issue or enhancement
 - Reproduction steps (if applicable)
 - Platform and Qt version information
-- Code examples when relevant 
+- Code examples when relevant
