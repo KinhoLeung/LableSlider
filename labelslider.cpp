@@ -433,6 +433,7 @@ void LabelSlider::rebuildLabels()
             QWidget *topBar = new QWidget(this);
             topBar->setProperty("ls_side", "top");
             topBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+            topBar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             int maxH = 0;
             for (int i = 0; i < count; ++i)
             {
@@ -455,6 +456,7 @@ void LabelSlider::rebuildLabels()
             QWidget *bottomBar = new QWidget(this);
             bottomBar->setProperty("ls_side", "bottom");
             bottomBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+            bottomBar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             int maxH = 0;
             for (int i = 0; i < count; ++i)
             {
@@ -475,6 +477,7 @@ void LabelSlider::rebuildLabels()
             QWidget *leftBar = new QWidget(this);
             leftBar->setProperty("ls_side", "left");
             leftBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+            leftBar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             int maxW = 0;
             for (int i = 0; i < count; ++i)
             {
@@ -497,6 +500,7 @@ void LabelSlider::rebuildLabels()
             QWidget *rightBar = new QWidget(this);
             rightBar->setProperty("ls_side", "right");
             rightBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+            rightBar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             int maxW = 0;
             for (int i = 0; i < count; ++i)
             {
